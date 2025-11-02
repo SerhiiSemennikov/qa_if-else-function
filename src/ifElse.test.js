@@ -10,6 +10,7 @@ describe("ifElse", () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalled();
     expect(second).not.toHaveBeenCalled();
 
@@ -27,6 +28,7 @@ describe("ifElse", () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalled();
 
@@ -34,5 +36,12 @@ describe("ifElse", () => {
     expect(second).toHaveBeenCalledWith();
 
     expect(second.mock.calls).toEqual([[]]);
+  });
+
+  it("should return undefined", () => {
+    const condition = jest.fn(() => false);
+    const first = jest.fn();
+    const second = jest.fn();
+    expect(ifElse(condition, first, second)).toBeUndefined();
   });
 });
